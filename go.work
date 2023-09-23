@@ -1,10 +1,10 @@
 go 1.20
 
 use (
+	./demo/proc_demo
 	./lesson1/stack_basic
 	./lesson1/pointers
 	./lesson1/heap_escape_struct
 	./lesson2/slice_example
 	./lesson2/slice_cut
-	./lesson2/interface_example
 )
