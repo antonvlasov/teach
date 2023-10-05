@@ -6,5 +6,5 @@ use (
 	./lesson1/pointers
 	./lesson1/heap_escape_struct
 	./lesson2/slice_example
-	./lesson2/slice_cut
+	./lesson2/1_slice_cut
 )
