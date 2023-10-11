@@ -199,3 +199,48 @@ func main() {
     }
 }
 ```
+
+## Паттерны канкаренси в Go
+### Fan-IN
+Если мы получаем данные из нескольких каналов, мы можем объединить их в один и вернуть его. Возможно, мы захотим перенаправить данные из нескольких источников в один поток.
+![image](https://github.com/antonvlasov/teach/assets/80615643/fae74738-cb58-4462-aab1-2fb55e3cdc8b)
+```go
+// принимает на вход context и каналы любых типов доступных только для чтения
+	func fanIn(ctx context.Context,fetchers ...<-chan any) chan any {
+// канал который будет объеденять
+	combinedFetchers := make(chan any)  
+	wg := sync.WaitGroup{}  
+	wg.Add(len(fetchers))  
+	  
+	for _, f := range fetchers {
+	f := f  
+	go func () {  
+		defer wg.Done()  
+		for{  
+			select {  
+				case res := <- f:  
+					combinedFetchers <- res  
+				case <- ctx.Done():  
+					return  
+			}  
+		}  
+		}()  
+	}
+
+	go func() {
+		wg.Wait
+		close(combinedFetchers)	
+	} ()
+	return combinedFetchers  
+}
+```
+
+### Worker pool 
+Этот паттерн позволяет эффективно использовать доступные вычислительные ресурсы и распределять задачи между рабочими единицами для ускорения выполнения.
+![image](https://github.com/antonvlasov/teach/assets/80615643/35b01f79-994f-4d26-8d06-ab72fb4c0216)
+
+Пример в файле example2.go
+
+### ДОМАШКА:
+Разработать конвейер чисел. Даны два канала: в первый пишутся числа (x) из массива,
+ во второй — результат операции x*2, после чего данные из второго канала должны выводиться в stdout.
