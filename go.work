@@ -7,4 +7,8 @@ use (
 	./lesson1/heap_escape_struct
 	./lesson2/slice_example
 	./lesson2/1_slice_cut
+	./lesson4/mutex
+	./lesson4/testing_examples
+	./lesson4/math
+	./lesson4/bench_press
 )
