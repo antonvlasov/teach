@@ -1,0 +1,4 @@
+package magic
+
+func NewMagic() {
+}
