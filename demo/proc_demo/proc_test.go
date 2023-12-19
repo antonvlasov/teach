@@ -47,7 +47,7 @@ func BenchmarkScalarMultiply(b *testing.B) {
 	var res []int
 	for i := 0; i < b.N; i++ {
 		b.StopTimer()
-		values, multiplicator := prepareArgs(10000)
+		values, multiplicator := prepareArgs(500)
 		b.StartTimer()
 
 		res = scalarMultiply(values, multiplicator)
@@ -60,7 +60,7 @@ func BenchmarkParallelScalarMultiply(b *testing.B) {
 	var res []int
 	for i := 0; i < b.N; i++ {
 		b.StopTimer()
-		values, multiplicator := prepareArgs(1000)
+		values, multiplicator := prepareArgs(500)
 		b.StartTimer()
 
 		res = parallelScalarMultiply(values, multiplicator)
