@@ -1,4 +1,4 @@
-go 1.20
+go 1.21.3
 
 use (
 	./demo/proc_demo
@@ -11,4 +11,5 @@ use (
 	./lesson4/testing_examples
 	./lesson4/math
 	./lesson4/bench_press
+	./lesson5
 )
